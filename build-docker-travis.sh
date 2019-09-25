@@ -5,9 +5,9 @@
 set -e
 
 # Run tests in Container
-# We use `--privileged` for cgroup compatability, which seems to be enabled by default in HTCondor 8.6.x
-set +x
-env_file=`pwd`/tests/env.sh
+scriptdir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+env_file=${scriptdir}/env.sh
 cat << EOF > "$env_file"
 #encrypted_e14a22ad945b_key=$encrypted_e14a22ad945b_key
 #encrypted_e14a22ad945b_iv=$encrypted_e14a22ad945b_iv
