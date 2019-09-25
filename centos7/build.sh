@@ -54,7 +54,8 @@ fi
 
 echo "Installing oxidized-web gem"
 ./gem install oxidized-web --verbose --no-document
-cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/charlock_holmes/mkmf.log
+cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/mkmf.log
+
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized-web gem" >&2
     exit 1
