@@ -15,16 +15,18 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-system_release=$(cat /etc/system-release)
+if [ $# -lt 2 ]; then
+    echo "usage: ${0} OS_TYPE OS_VERSION" >&2
+    exit 1
+fi
+
+ostype="${1}"
+osversion="${2}"
 
 mkdir -p ${builddir} 2>&1
 
-if [ "$(cat /etc/system-release 2>&1 | grep 'CentOS')X" != "X"  ]; then
-    if [ "$(cat /etc/system-release 2>&1 | grep 'release 7')X" != "X" ]; then
-        scriptdir=${basedir}/centos7
-        installdir=${scriptdir}/rpm
-    fi
-fi
+scriptdir=${basedir}/${ostype}${osversion}
+installdir=${scriptdir}/rpm
 
 source ${scriptdir}/build.sh
 
