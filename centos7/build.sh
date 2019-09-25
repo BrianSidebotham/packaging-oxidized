@@ -2,7 +2,7 @@
 
 # Go crazy and get the whole development tool set
 yum group install -y "Development Tools"
-yum install -y wget openssl-devel zlib-devel cmake libicu-devel readline-devel gdbm-devel
+yum install -y wget openssl-devel zlib-devel cmake libicu-devel readline-devel gdbm-devel tree
 
 if [ "${ruby_url}X" = "X" ]; then
     echo "ERROR: Need ruby_url so we know where to download the ruby source code." >&2
