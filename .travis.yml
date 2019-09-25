@@ -16,7 +16,7 @@ jobs:
         - sleep 5
         - sudo docker pull centos:centos${OS_VERSION}
       script:
-        - build-docket-travis.sh
+        - build-docker-travis.sh
     - <<: *run_tests
       env:
         - OS_TYPE=centos OS_VERSION=7 BUILD_ENV=deploy
