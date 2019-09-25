@@ -45,13 +45,15 @@ fi
 
 cd /opt/oxidized/bin
 
-./gem install oxidized --no-document
+echo "Installing oxidized gem"
+./gem install oxidized --verbose --no-document
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized gem" >&2
     exit 1
 fi
 
-./gem install oxidized-web --no-document
+echo "Installing oxidized-web gem"
+./gem install oxidized-web --verbose --no-document
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized-web gem" >&2
     exit 1
