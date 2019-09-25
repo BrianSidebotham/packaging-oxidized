@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Go crazy and get the whole development tool set
-yum group install "Development Tools"
+yum group install -y "Development Tools"
 yum install -y wget openssl-devel zlib-devel cmake libicu-devel readline-devel gdbm-devel
 
 if [ "${ruby_url}X" = "X" ]; then
