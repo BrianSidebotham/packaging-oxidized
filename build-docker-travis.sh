@@ -26,7 +26,7 @@ if [ $OS_VERSION -eq 6 ]; then
         --volume /sys/fs/cgroup:/sys/fs/cgroup \
         --volume `pwd`:/packaging-oxidized:rw \
         centos:centos${OS_VERSION} \
-        /bin/bash -c "exec bash /packaging-oxidized/build.sh ${OS_VERSION} ${BUILD_ENV}"
+        /bin/bash -c "exec bash /packaging-oxidized/build.sh ${OS_TYPE} ${OS_VERSION} ${BUILD_ENV}"
 elif [[ $OS_VERSION -eq 7 ]]; then
    docker run --privileged --detach --tty --interactive --env "container=docker" \
           --volume /sys/fs/cgroup:/sys/fs/cgroup \
@@ -37,7 +37,7 @@ elif [[ $OS_VERSION -eq 7 ]]; then
    DOCKER_CONTAINER_ID=$(docker ps | grep centos | awk '{print $1}')
    docker logs $DOCKER_CONTAINER_ID
    docker exec --tty --interactive $DOCKER_CONTAINER_ID \
-          /bin/bash -c "exec bash /packaging-oxidized/build.sh ${OS_VERSION} ${BUILD_ENV};"
+          /bin/bash -c "exec bash /packaging-oxidized/build.sh ${OS_TYPE} ${OS_VERSION} ${BUILD_ENV};"
 
    docker ps -a
    docker stop $DOCKER_CONTAINER_ID
