@@ -55,6 +55,10 @@ fi
 echo "Installing oxidized-web gem"
 ./gem install oxidized-web --verbose --no-document
 
+echo "EXTCONF.RB:"
+cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/charlock_holmes/extconf.rb
+
+echo "FIND:"
 find /opt/oxidized -type f -iname 'mkmf.log'
 cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/mkmf.log
 
