@@ -7,7 +7,7 @@ yum group install -y "Development Tools"
 yum install -y wget which tree cmake
 
 # Development libraries required by this build
-yum install -y openssl-devel zlib-devel libicu-devel readline-devel gdbm-devel
+yum install -y openssl-devel zlib-devel libicu-devel readline-devel gdbm-devel libticonv-devel libssh2-devel http-parser-devel
 
 if [ "${ruby_url}X" = "X" ]; then
     echo "ERROR: Need ruby_url so we know where to download the ruby source code." >&2
@@ -51,14 +51,14 @@ fi
 cd /opt/oxidized/bin
 
 echo "Installing oxidized gem"
-./gem install oxidized --verbose --no-document
+./gem install oxidized --no-document
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized gem" >&2
     exit 1
 fi
 
 echo "Installing oxidized-web gem"
-./gem install oxidized-web --verbose --no-document
+./gem install oxidized-web --no-document
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized-web gem" >&2
     exit 1
@@ -89,7 +89,9 @@ cd ${installdir}/INSTALL
 tar czf "${installdir}/SOURCES/oxidized-${oxidized_version}.tar.gz" *
 
 cp -r ${scriptdir}/SPECS ${installdir}/
-rpmbuild --define "_topdir ${installdir}" -ba "${installdir}/SPECS/oxidized.spec"
+
+# Lots of logs, through away non-errors
+rpmbuild --define "_topdir ${installdir}" -ba "${installdir}/SPECS/oxidized.spec" > /dev/null
 
 if [ $? -ne 0 ]; then
     echo "ERROR: Failed to build RPM" >&2
