@@ -2,7 +2,12 @@
 
 # Go crazy and get the whole development tool set
 yum group install -y "Development Tools"
-yum install -y wget openssl-devel zlib-devel cmake libicu-devel readline-devel gdbm-devel tree
+
+# Common tools required by package installers
+yum install -y wget which tree cmake
+
+# Development libraries required by this build
+yum install -y openssl-devel zlib-devel libicu-devel readline-devel gdbm-devel
 
 if [ "${ruby_url}X" = "X" ]; then
     echo "ERROR: Need ruby_url so we know where to download the ruby source code." >&2
@@ -54,14 +59,6 @@ fi
 
 echo "Installing oxidized-web gem"
 ./gem install oxidized-web --verbose --no-document
-
-echo "EXTCONF.RB:"
-cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/charlock_holmes/extconf.rb
-
-echo "FIND:"
-find /opt/oxidized -type f -iname 'mkmf.log'
-cat /opt/oxidized/lib/ruby/gems/2.6.0/gems/charlock_holmes-0.7.6/ext/mkmf.log
-
 if [ $? -ne 0 ]; then
     echo "ERROR: Could not install oxidized-web gem" >&2
     exit 1
